@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin-layout">
+	<div layout:fragment="main_content">
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Student<small>All students</small>
+				</h1>
+			</section>
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-2"></div>
+					<div class="col-md-8 col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									Student Insert Form (<span th:text="${schclass}"></span>)
+								</h3>
+								<p class="text-red" th:text="${errormessage}"></p>
+							</div>
+							<div class="box-body table-responsive no-padding">
+								<div class="col-md-12">
+									<form role="form" method="POST" th:object="${student}"
+										th:action="@{/adminstudent/save-student}"
+										enctype="multipart/form-data">
+										<input type="hidden" id="schclass" name="schclass"
+											th:value="${schclass}" /> 
+										<input type="hidden" id="Isactive"
+											name="Isactive" th:value="${T(school.model.enumvalue.Isactive).Active}" />
+
+										<div class="form-group">
+											<label>Student Name</label> <input type="text"
+												th:required="required" maxlength="250" name="name" id="name"
+												class="form-control" placeholder="Enter student name"
+												th:value="${name}" /> <span class="help-block text-danger"
+												th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+										</div>
+
+										<div class="row">
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Student Roll</label> <input type="number"
+														th:required="required" maxlength="250" name="rollno"
+														id="name" class="form-control"
+														placeholder="Enter student roll number"
+														th:value="${rollno}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('rollno')}"
+														th:errors="*{rollno}"></span>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Student Registration</label> <input type="text"
+														maxlength="250" name="registration" id="registration"
+														class="form-control"
+														placeholder="Enter student registration"
+														th:value="${registration}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('registration')}"
+														th:errors="*{registration}"></span>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div th:if="${#lists.isEmpty(stsession)}">
+													<label>Session</label>
+													<p class="text-red">
+														Please <a class="text-green"
+															th:href="@{/adminstsession/insert}">Create Session</a>
+														before insert student.
+													</p>
+												</div>
+												<div th:if="!${#lists.isEmpty(stsession)}">
+													<div class="form-group">
+														<label>Session</label> <select class="form-control"
+															th:required="required" id="stsession" name="stsession"
+															th:value="${stsession}">
+															<option th:each="stsession : ${stsession}"
+																th:value="${stsession.id}" th:selected="${stsession}"
+																th:text="${stsession.title}"></option>
+														</select>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+
+										<div class="row">
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Gender</label> <select class="form-control"
+														id="gender" name="gender" th:value="${gender}">
+														<option
+															th:each="gender : ${T(school.model.enumvalue.Gender).values()}"
+															th:value="${{gender}}"
+															th:selected="${gender == T(school.model.enumvalue.Gender)}"
+															th:text="${gender.name()}"></option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Version</label> <select class="form-control"
+														id="version" name="version" th:value="${version}">
+														<option
+															th:each="version : ${T(school.model.enumvalue.Version).values()}"
+															th:value="${{version}}"
+															th:selected="${version == T(school.model.enumvalue.Version)}"
+															th:text="${version.name()}"></option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Regularity</label> <select class="form-control"
+														id="regularity" name="regularity" th:value="${regularity}">
+														<option
+															th:each="regularity : ${T(school.model.enumvalue.Regularity).values()}"
+															th:value="${{regularity}}"
+															th:selected="${regularity == T(school.model.enumvalue.Regularity)}"
+															th:text="${regularity.name()}"></option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+
+											<div class="col-xs-4">
+												<div th:if="!${#lists.isEmpty(section)}">
+													<div class="form-group">
+														<label>Section</label> <select class="form-control"
+															id="section" name="section" th:value="${section}">
+															<option th:each="section : ${section}"
+																th:value="${section.id}" th:selected="${section}"
+																th:text="${section.title}"></option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div
+													th:if="${schclass == T(school.model.enumvalue.Schclass).Class9} or ${schclass == T(school.model.enumvalue.Schclass).Class10}">
+													<div class="form-group">
+														<label>Groups</label> <select class="form-control"
+															id="groups" name="groups" th:value="${groups}">
+															<option
+																th:each="groups : ${T(school.model.enumvalue.Groups).values()}"
+																th:value="${{groups}}"
+																th:selected="${groups == T(school.model.enumvalue.Groups)}"
+																th:text="${groups.name()}"></option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12 col-md-6 text-center">
+												<input type="submit" value="Submit" class="btn btn-primary"
+													tabindex="7" />
+											</div>
+											<div class="col-xs-12 col-md-6 text-center">
+												<input type="Reset" onclick="window.history.go(-1);"
+													value="Cancel" class="btn btn-danger" tabindex="7" />
+											</div>
+										</div>
+										<hr class="colorgraph" />
+									</form>
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<div class="col-xs-2"></div>
+				</div>
+
+			</section>
+			<!-- /.content -->
+		</div>
+	</div>
+</div>

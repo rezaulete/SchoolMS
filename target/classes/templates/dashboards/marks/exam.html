@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin-layout">
+	<div layout:fragment="main_content">
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Marks<small>Insert Marks</small>
+				</h1>
+			</section>
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-3"></div>
+					<div class="col-md-6 col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h2 class="box-title">Select Exam</h2>
+
+							</div>
+							<!-- /.box-header -->
+							<form role="form" method="POST" th:object="${exam}" th:action="@{'/adminmarks/add-marks/'+${student.id}}" enctype="multipart/form-data">
+                 
+							<div class="form-group">
+								<label>Exam Name</label> 
+								<select class="form-control" id="exam"
+									name="exam" >
+									<option th:each="exam : ${exam}" th:value="${exam.id}"
+										th:selected="${exam}" th:text="${exam.title}"></option>
+								</select>
+							</div>
+							 <div class="row">
+			                 <div class="col-xs-12 col-md-6 text-center"><input type="submit" value="Submit" class="btn btn-primary" tabindex="7"/></div>
+			               <div class="col-xs-12 col-md-6 text-center"><input type="Reset" onclick="window.history.go(-1);" value="Cancel" class="btn btn-danger" tabindex="7"/></div>
+		                  </div>
+		                 <hr class="colorgraph"/> 
+							</form>
+                        	<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+
+				</div>
+
+			</section>
+			<!-- /.content -->
+		</div>
+	</div>
+</div>

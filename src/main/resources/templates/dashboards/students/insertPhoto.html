@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin-layout">
+	<div layout:fragment="main_content">
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Student<small>All students</small>
+				</h1>
+			</section>
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-2"></div>
+					<div class="col-md-8 col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									Insert Photo of <span th:text="${student.name}"></span>
+								</h3>
+								<p class="text-red" th:text="${errormessage}"></p>
+							</div>
+							<div class="box-body table-responsive no-padding">
+								<div class="col-md-12">
+									<form role="form" method="POST" th:object="${studentPhoto}"
+										th:action="@{/dashboards/students/save-studentphoto}"
+										enctype="multipart/form-data" action="">
+										
+										<input type="hidden" id="student" name="student"
+											th:value="${student.id}" /> 
+											
+											<input type="hidden" id="phototitle" name="phototitle"
+											th:value="${student.name}" /> 
+										
+                                       
+										<div class="form-group">
+											<label>Upload Photo</label> <input th:required="required"
+												type="file" name="file" accept="image/*" /><br />
+											<p th:text="${message}" class="text-danger"></p>
+										</div>
+
+										<div class="row">
+											<div class="col-xs-12 col-md-6 text-center">
+												<input type="submit" value="Submit" class="btn btn-primary"
+													tabindex="7" />
+											</div>
+											<div class="col-xs-12 col-md-6 text-center">
+												<input type="Reset" onclick="window.history.go(-1);"
+													value="Cancel" class="btn btn-danger" tabindex="7" />
+											</div>
+										</div>
+										<hr class="colorgraph" />
+									</form>
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<div class="col-xs-2"></div>
+				</div>
+
+			</section>
+			<!-- /.content -->
+		</div>
+	</div>
+</div>

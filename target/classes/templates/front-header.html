@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<div style="background-color: #FFF; min-height: 120px">
+		<div class="Back1">
+			<div th:if="${#lists.isEmpty(organization)}">
+				<div class="col-sm-12">
+					<h1 class="text-center text-black zoom3">School Management
+						System</h1>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<nav class="navbar navbar-static-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a th:href="@{/}" class="navbar-toggle collapsed pull-left"><b><i
+						class="fa fa-home" aria-hidden="true"></i></b> </a>
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar-collapse">
+					<i class="fa fa-bars"></i>Menu
+				</button>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="change1"><a th:href="@{/}">HOME</a></li>
+					
+					<li class="dropdown change1"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">ABOUT US<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Message from Chairman</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Message from Principle</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Governing Body</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Vision and Objectives</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Infrastructure</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Achievements</a></li>
+							<li class="divider"></li>
+							<li><a href="#">History</a></li>
+						</ul>
+					</li>
+					
+					<li class="dropdown change1"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">ACADEMIC<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Academic Calendar</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Class Routine</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Exam Routine</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Exam Result</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Dress Code</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Syllabus</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Code of Conduct</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Lesson Plan</a></li>
+						</ul>
+					</li>
+					
+					<li class="dropdown change1"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">INFORMATION<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Notice Board</a></li>
+							<li class="divider"></li>
+							<li><a href="#">News and Events</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Teachers Info</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Students Info</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Staffs Info</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Library</a></li>
+						</ul>
+					</li>
+					
+					<li class="dropdown change1"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">ADMISSION<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Admission Circular</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Admission Form</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Admission Result</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Fees and Payments</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Scholarships</a></li>
+						</ul>
+					</li>
+										
+					<li class="dropdown change1"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">CO-CURRICULUM<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Sports</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Tours</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Scout and BNCC</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Science Club</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Debate Club</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Cultural Club</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Language Club</a></li>
+						</ul>
+					</li>
+					
+					<li class="change1"><a th:href="@{/}">GALLERY</a></li>
+					<li class="change1"><a th:href="@{/}">CONTACT</a></li>
+				</ul>
+
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<div class="MarkBrown"></div>
+</div>
+

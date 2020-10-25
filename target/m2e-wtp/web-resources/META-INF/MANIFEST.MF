@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Razu
+Build-Jdk: 14.0.2
+Implementation-Title: Result-Management
+Implementation-Version: 1.0.0-SCHOOL
+Implementation-Vendor-Id: School
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/SchoolMS/
+Created-By: Maven Integration for Eclipse
+
