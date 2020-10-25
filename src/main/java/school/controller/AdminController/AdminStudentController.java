@@ -29,6 +29,7 @@ import school.model.enumvalue.Schclass;
 import school.model.enumvalue.Version;
 import school.repository.SectionRepository;
 import school.repository.StsessionRepository;
+import school.repository.StudentDetailsRepository;
 import school.repository.StudentPhotoRepository;
 import school.repository.StudentRepository;
 import school.services.StudentService;
@@ -47,30 +48,44 @@ public class AdminStudentController {
 	SectionRepository sectionRepository;
 	@Autowired
 	StudentPhotoRepository studentPhotoRepository;
+	@Autowired
+	StudentDetailsRepository studentDetailsRepository;
 	
 	private static String UPLOAD_FOLDER = "src//main//resources//static//images//StudentPhoto//";
 	
-	// Open about us table
+	
+	
+	// Open Class for Student table
 	@RequestMapping(value = { "/", "/index" })
 	public String home(Model model) {
 		model.addAttribute("student", studentRepository.findAll());
 		return "dashboards/students/index";
 	}
 
+	
+	
+	// Open Student list table of a single class	
 	@RequestMapping(value = "/{schclass}")
 	public String student(Model model, @PathVariable("schclass") Schclass schclass) {
 		model.addAttribute("student", studentService.getStudentByClass(schclass));
 		return "dashboards/students/student";
 	}
+	
+	
 
+	// Open a single Student from the list
 	@RequestMapping("/view-student/{id}")
 	public String view(Model model, @PathVariable("id") Long id) {
 		Student student= studentRepository.findById(id);
 		model.addAttribute("student", student);
-		model.addAttribute("studentPhoto", studentPhotoRepository.findByStudent(student));		
+		model.addAttribute("studentPhoto", studentPhotoRepository.findByStudent(student));	
+		model.addAttribute("studentDetails", studentDetailsRepository.findByStudent(student));	
 		return "dashboards/students/view";
 	}
 
+	
+	
+	// Inserting new Student to the list
 	@RequestMapping(value = "/insert/{schclass}")
 	public String insert(Model model, @PathVariable("schclass") Schclass schclass) {
 		model.addAttribute("section", sectionRepository.findBySchclass(schclass));
@@ -86,10 +101,13 @@ public class AdminStudentController {
 		return "dashboards/students/insert";
 	}
 
-	// Save about us Information
+	
+	
+	// Save Student Information to the list 
 	@PostMapping("/save-student")
 	public String save(Model model, @Valid @ModelAttribute("student") Student student, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
+		
 		// If there are some error...
 		if (bindingResult.hasErrors()) {
 
@@ -100,14 +118,43 @@ public class AdminStudentController {
 
 		studentRepository.save(student);
 		redirectAttributes.addAttribute("schclass", student.getSchclass());
-		return "redirect:/adminstudent/student/{schclass}";
+		return "redirect:/dashboards/students/{schclass}";
 	}
 
-	// Delete about us file by id
+	
+	
+	
+	//Delete Student file by id
 	@RequestMapping("/delete-student")
 	public String delete(Model model, @RequestParam Long id, RedirectAttributes redirectAttributes) {
 		Student student = studentRepository.findById(id);
 		Schclass schclass = student.getSchclass();
+		StudentPhoto studentPhoto= studentPhotoRepository.findByStudent(student);
+		if(studentPhoto!= null)
+		{
+			try { 
+	            Path path=Paths.get(UPLOAD_FOLDER+studentPhoto.getPicFile());
+	            Files.delete(path);
+	            System.out.println("Image Deleted !!!"); 
+	 		}catch(Exception e)
+	        {
+	            System.out.println("Failed to Delete image !!");            
+	        }
+			 studentPhotoRepository.delete(studentPhoto.getId()); 
+			 
+			 try {
+					studentRepository.delete(id);
+
+				} catch (Exception e) {
+					model.addAttribute("stsession", stsessionRepository.findAll());
+					model.addAttribute("errormessage", "Can't delete this data.");
+					model.addAttribute("error", e.getMessage());
+					model.addAttribute("student", studentService.getStudentByClass(schclass));
+					return "dashboards/students/student";
+				}
+			 
+		}
+		else { 
 		try {
 			studentRepository.delete(id);
 
@@ -118,11 +165,14 @@ public class AdminStudentController {
 			model.addAttribute("student", studentService.getStudentByClass(schclass));
 			return "dashboards/students/student";
 		}
-
+		}
 		redirectAttributes.addAttribute("schclass", student.getSchclass());
-		return "redirect:/adminstudent/student/{schclass}";
+		return "redirect:/dashboards/students/{schclass}";
 	}
 
+	
+	
+	// Edit a single Student from the list
 	@RequestMapping("/edit-student")
 	public String edit(Model model, @RequestParam Long id) {
 		Student student = studentRepository.findById(id);
@@ -141,6 +191,9 @@ public class AdminStudentController {
 		return "dashboards/students/edit";
 	}
 
+	
+	
+	// Update a single Student data
 	@PostMapping("/update-student")
 	public String Update(Model model, @ModelAttribute Student student, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
@@ -162,11 +215,12 @@ public class AdminStudentController {
 		}
 		studentRepository.save(student);
 		redirectAttributes.addAttribute("schclass", student.getSchclass());
-		return "redirect:/adminstudent/student/{schclass}";
+		return "redirect:/dashboards/students/{schclass}";
 	}
 	
 	
-	
+	////// STUDENT PHOTO PART//////
+	//Upload Student Photo page
     @RequestMapping("/photoinsert/{stid}")
     public String studentphotoinsert(Model model, @PathVariable("stid") Long stid) {
     	
@@ -175,8 +229,9 @@ public class AdminStudentController {
         return "dashboards/students/insertPhoto";
     }
 
+    
 
-    // Save about us Information  
+    // Save Student Photo 
     @PostMapping("/save-studentphoto")
     public String studentphotosave(Model model,@Valid @ModelAttribute("studentPhoto") StudentPhoto studentPhoto
     		,BindingResult bindingResult
@@ -223,8 +278,7 @@ public class AdminStudentController {
  		} catch (IOException e) {
  			e.printStackTrace();
  		}
- 		
- 		    	
+ 				    	
  		        studentPhotoRepository.save(studentPhoto);
  		       redirectAttributes.addAttribute("stid", student.getId());
                 return "redirect:/dashboards/students/view-student/{stid}";
@@ -232,7 +286,8 @@ public class AdminStudentController {
     
     
     
-    // Delete about us file by id 
+    
+    // Delete Student Photo by id 
  	@RequestMapping("/delete-studentphoto") 
     public String studentphotodelete(Model model
     		,@RequestParam Long id, RedirectAttributes redirectAttributes) {
@@ -256,13 +311,18 @@ public class AdminStudentController {
     }
  	
  	
- 	@RequestMapping("/edit-studentphoto") 
- 	public String edits(Model model,@RequestParam Long id) {        
-        model.addAttribute("studentphoto",studentPhotoRepository.findById(id));        
+ 	
+    // Open edit Student Photo page
+ 	@RequestMapping("/edit-studentphoto/{stid}") 
+ 	public String edits(Model model, @PathVariable("stid") Long stid) {        
+        model.addAttribute("studentphoto",studentPhotoRepository.findById(stid));        
         return "dashboards/students/editPhoto";
  	}
  	
  	
+ 	
+ 	
+    // Update Student new Photo 
  	@PostMapping("/update-studentphoto") 
     public String studentphotoUpdate(Model model,@ModelAttribute StudentPhoto studentPhoto
     		, BindingResult bindingResult
@@ -270,6 +330,8 @@ public class AdminStudentController {
     		) {	
  		
  		int size=(int) file.getSize(); 
+ 		Long stid=studentPhoto.getStudent().getId();
+    	Student student= studentRepository.findById(stid);
  		if (file.isEmpty()) {
  			studentPhoto.setPicFile(studentPhoto.getPicFile());			
  	      	}
@@ -277,7 +339,7 @@ public class AdminStudentController {
          	model.addAttribute("errormessage", "Input file is more than 1MB");
          	model.addAttribute("message", "File is to large. please thy file below 1MB ");
  			model.addAttribute("studentPhoto",studentPhoto); 
- 		    return "dashboards/students/edit";
+ 		    return "dashboards/students/editPhoto";
    
                  }
  		 else {
@@ -306,10 +368,16 @@ public class AdminStudentController {
          if (bindingResult.hasErrors()) {	
  		        model.addAttribute("errormessage", "Something wrong...");		 
  		        model.addAttribute("studentPhoto",studentPhoto);  
- 		        return "dashboards/students/edit";
+ 		        return "dashboards/students/editPhoto";
         }	         		    	
                   studentPhotoRepository.save(studentPhoto);
-                 return "redirect:/adminteachers/index";
+                  redirectAttributes.addAttribute("stid", student.getId());
+                  return "redirect:/dashboards/students/view-student/{stid}";
     }
 
+ 	
+     //////STUDENT DETAILS PART//////
+	//Insert Student Details page
+ 	
+ 	
 }

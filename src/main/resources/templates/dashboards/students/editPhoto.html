@@ -18,24 +18,24 @@
 						<div class="box">
 							<div class="box-header">
 								<h3 class="box-title">
-									Insert Photo of <span th:text="${student.name}"></span>
+									Insert Photo of <span th:text="${studentphoto.student.name}"></span>
 								</h3>
 								<p class="text-red" th:text="${errormessage}"></p>
 							</div>
 							<div class="box-body table-responsive no-padding">
 								<div class="col-md-12">
-									<form role="form" method="POST" th:object="${studentPhoto}"
-										th:action="@{/dashboards/students/edit-studentphoto}"
+									<form role="form" method="POST" th:object="${studentphoto}"
+										th:action="@{/dashboards/students/update-studentphoto}"
 										enctype="multipart/form-data" action="">
 										
 										<input type="hidden" id="id" name="id"
-											th:value="${studentPhoto.id}"/> 
+											th:value="${studentphoto.id}"/> 
 											
 										<input type="hidden" id="student" name="student"
-											th:value="${studentPhoto.student.id}" /> 
+											th:value="${studentphoto.student.id}" /> 
 											
 											<input type="hidden" id="phototitle" name="phototitle"
-											th:value="${studentPhoto.title}" /> 
+											th:value="${studentphoto.phototitle}" /> 
 										
                                        
 										<div class="form-group">
@@ -43,8 +43,7 @@
 											<input th:required="required"
 												type="file" name="file" accept="image/*" /><br />
 												
-											<p th:text="${message}" class="text-danger"></p>
-											<input type="hidden" id="picFile" name="picFile" th:value="${studentPhoto.picFile}"/>
+											<input type="hidden" id="picFile" name="picFile" th:value="${studentphoto.picFile}"/>
 										</div>
 
 										<div class="row">

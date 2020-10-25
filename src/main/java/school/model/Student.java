@@ -7,6 +7,7 @@ package school.model;
 
 import java.util.Date;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -229,7 +230,6 @@ public class Student {
 		this.createDate = createDate;
 		this.modifyDate = modifyDate;
 	}
-
 
 
 }

@@ -111,5 +111,203 @@ public class StudentDetails {
 	}
 
 
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Student getStudent() {
+		return student;
+	}
+
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public String getFathername() {
+		return fathername;
+	}
+
+
+	public void setFathername(String fathername) {
+		this.fathername = fathername;
+	}
+
+
+	public String getFatheroccupation() {
+		return fatheroccupation;
+	}
+
+
+	public void setFatheroccupation(String fatheroccupation) {
+		this.fatheroccupation = fatheroccupation;
+	}
+
+
+	public Long getFathercontactno() {
+		return fathercontactno;
+	}
+
+
+	public void setFathercontactno(Long fathercontactno) {
+		this.fathercontactno = fathercontactno;
+	}
+
+
+	public Long getFathernid() {
+		return fathernid;
+	}
+
+
+	public void setFathernid(Long fathernid) {
+		this.fathernid = fathernid;
+	}
+
+
+	public String getMothername() {
+		return mothername;
+	}
+
+
+	public void setMothername(String mothername) {
+		this.mothername = mothername;
+	}
+
+
+	public String getMotheroccupation() {
+		return motheroccupation;
+	}
+
+
+	public void setMotheroccupation(String motheroccupation) {
+		this.motheroccupation = motheroccupation;
+	}
+
+
+	public Long getMothercontactno() {
+		return mothercontactno;
+	}
+
+
+	public void setMothercontactno(Long mothercontactno) {
+		this.mothercontactno = mothercontactno;
+	}
+
+
+	public Long getMothernid() {
+		return mothernid;
+	}
+
+
+	public void setMothernid(Long mothernid) {
+		this.mothernid = mothernid;
+	}
+
+
+	public String getGuardianname() {
+		return guardianname;
+	}
+
+
+	public void setGuardianname(String guardianname) {
+		this.guardianname = guardianname;
+	}
+
+
+	public Long getGuardiancontactno() {
+		return guardiancontactno;
+	}
+
+
+	public void setGuardiancontactno(Long guardiancontactno) {
+		this.guardiancontactno = guardiancontactno;
+	}
+
+
+	public String getStsession() {
+		return stsession;
+	}
+
+
+	public void setStsession(String stsession) {
+		this.stsession = stsession;
+	}
+
+
+	public Schclass getGrade() {
+		return grade;
+	}
+
+
+	public void setGrade(Schclass grade) {
+		this.grade = grade;
+	}
+
+
+	public Version getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(Version version) {
+		this.version = version;
+	}
+
+
+	public Date getAdmitiondate() {
+		return admitiondate;
+	}
+
+
+	public void setAdmitiondate(Date admitiondate) {
+		this.admitiondate = admitiondate;
+	}
+
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
 	
 }

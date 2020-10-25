@@ -6,8 +6,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>Student
-                    <small>All Students</small>
+                <h1>Student:<span th:text="${student.name}"></span>
                 </h1>
             </section>
             <!-- Main content -->
@@ -76,12 +75,12 @@
                       </tr>
                       <tr> 
         				<td>Edit</td> 
-        				<td><a th:href="@{'/adminstudents/edit-student?id=' +${student.id}}"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>        				
+        				<td><a th:href="@{'/dashboards/students/edit-student?id=' +${student.id}}"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>        				
                       </tr>  
                       
                       <tr> 
         				<td>Delete</td> 
-        			   <td><a class="text-red" th:href="@{'/adminstudent/delete-student?id=' +${student.id}}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="glyphicon glyphicon-trash glyphicon"></span> Delete</a></td>
+        			   <td><a class="text-red" th:href="@{'/dashboards/students/delete-student?id=' +${student.id}}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="glyphicon glyphicon-trash glyphicon"></span> Delete</a></td>
                       </tr>        				
                   </table>
                   </div>
@@ -98,9 +97,77 @@
                    <a th:href="@{'/dashboards/students/photoinsert/' +${student.id}}" class="btn btn-success" style="margin-left:25%;">Insert Image</a>
                     </div>
                      </div> 
-                  
-                  
+                       
+                       <div class="col-sm-12">
+                    <div th:if="!${#lists.isEmpty(studentDetails)}">
+                     <table class="table table-hover" th:object="${student}">                    		
+        		     <tr>
+        		        <td>ID</td>
+        		        <td th:text="${student.id}"></td>
+        		        </tr>
+        		        <tr>
+        		        <td>Name</td>
+        		        <td th:text="${student.name}"></td>
+        		        </tr>
+        		        <tr>
+        				<td>Registration Number</td>
+        				<td th:text="${student.registration}"></td>
+        			    </tr> 
+        				<tr>
+        				<td>Roll Number</td>
+        		        <td th:text="${student.rollno}"></td>
+        		        </tr> 
+        				 
+        			    <tr>
+        				<td>Class</td>
+        				<td th:text="${student.schclass}"></td>
+        				</tr> 
+        				<tr>  
+        				<td>Version</td>
+        				<td th:text="${student.version}"></td> 
+        				</tr>
+        				
+        				 <tr> 
+        				<td>Gender</td> 
+        				<td th:text="${student.gender}"></td>        				
+                      </tr>
+                     
+                      <tr> 
+        				<td>Data Uploaded</td> 
+        				<td th:text="${#dates.format(student.createDate, 'dd-MMM-yyyy HH:mm')}"></td>       				
+                      </tr>
+                      <tr> 
+        				<td>Last Modified</td> 
+        				<td th:text="${#dates.format(student.modifyDate, 'dd-MMM-yyyy HH:mm')}"></td>       				
+                      </tr>
+                      <tr> 
+        				<td>Edit</td> 
+        				<td><a th:href="@{'/dashboards/students/edit-studentdetails/' +${studentPhoto.id}}"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>        				
+                      </tr>  
+                      
+                      <tr> 
+        				<td>Delete</td> 
+        			   <td><a class="text-red" th:href="@{'/dashboards/students/delete-studentdetails?id=' +${studentDetails.id}}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="glyphicon glyphicon-trash glyphicon"></span> Delete</a></td>
+                      </tr>        				
+                  </table>
+                    
+                     
+                     <a th:href="@{'/dashboards/students/edit-studentdetails/' +${studentPhoto.id}}" class="btn btn-success" style="margin-left:25%;">Edit </a>
+                     <a th:href="@{'/dashboards/students/delete-studentdetails?id=' +${studentPhoto.id}}" class="btn btn-success" style="margin-left:25%;">Delete </a>
+                    
+                    </div> 
+                    
+                    <div th:if="${#lists.isEmpty(studentDetails)}"> 
+                   <h2>Insert Student Details</h2>
+                    <a th:href="@{'/dashboards/students/insertdetails/' +${student.id}}" class="btn btn-success" style="margin-left:25%;">Insert Image</a>
+                    </div>
+                     </div>
+                                    
                   </div>
+                  
+                  
+                  
+                  
            </div>
            <div class="col-xs-12 col-md-12 text-center"><input type="Reset" onclick="window.history.go(-1);" value="Cancel" class="btn btn-danger" tabindex="7"/></div>
             <!-- /.box-body -->
