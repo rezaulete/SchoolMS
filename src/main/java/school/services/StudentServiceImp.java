@@ -45,4 +45,10 @@ public class StudentServiceImp implements StudentService {
 		List<Student> student=studentRepository.findBySchclass(schclass);
 		return student;
 	}
+
+	@Override
+	public Student DeleteStudentByID(Long id) {
+
+		return null;
+	}
 }

@@ -12,5 +12,6 @@ public interface StudentService {
 	public List<Student> getStudentByIDDesc();
 	public Student getSingleStudentByID();
 	public List<Student> getStudentByClass(Schclass schclass);
+	public Student DeleteStudentByID(Long id);
 
 }

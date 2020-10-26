@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import school.model.Student;
+import school.model.StudentDetails;
 import school.model.StudentPhoto;
 import school.model.enumvalue.Gender;
 import school.model.enumvalue.Groups;
@@ -130,46 +131,89 @@ public class AdminStudentController {
 		Student student = studentRepository.findById(id);
 		Schclass schclass = student.getSchclass();
 		StudentPhoto studentPhoto= studentPhotoRepository.findByStudent(student);
+		StudentDetails studentdetails=studentDetailsRepository.findByStudent(student);
 		if(studentPhoto!= null)
 		{
-			try { 
-	            Path path=Paths.get(UPLOAD_FOLDER+studentPhoto.getPicFile());
-	            Files.delete(path);
-	            System.out.println("Image Deleted !!!"); 
-	 		}catch(Exception e)
-	        {
-	            System.out.println("Failed to Delete image !!");            
-	        }
-			 studentPhotoRepository.delete(studentPhoto.getId()); 
-			 
-			 try {
-					studentRepository.delete(id);
-
-				} catch (Exception e) {
-					model.addAttribute("stsession", stsessionRepository.findAll());
-					model.addAttribute("errormessage", "Can't delete this data.");
-					model.addAttribute("error", e.getMessage());
-					model.addAttribute("student", studentService.getStudentByClass(schclass));
-					return "dashboards/students/student";
-				}
-			 
-		}
+			if(studentdetails!= null)
+			{
+				try { 
+		            Path path=Paths.get(UPLOAD_FOLDER+studentPhoto.getPicFile());
+		            Files.delete(path);
+		 		}catch(Exception e)
+		        {
+		 			model.addAttribute("errormessage", "Failed to delete Photo.");
+					model.addAttribute("error", e.getMessage());            
+		        }
+			  studentPhotoRepository.delete(studentPhoto.getId()); 
+			  studentDetailsRepository.delete(studentdetails.getId()); 
+				 try {
+						studentRepository.delete(id);
+					} catch (Exception e) {
+						model.addAttribute("stsession", stsessionRepository.findAll());
+						model.addAttribute("errormessage", "Can't delete this data.");
+						model.addAttribute("error", e.getMessage());
+						model.addAttribute("student", studentService.getStudentByClass(schclass));
+						return "dashboards/students/student";
+					}			
+			}
+			else {
+				try { 
+		            Path path=Paths.get(UPLOAD_FOLDER+studentPhoto.getPicFile());
+		            Files.delete(path);
+		            System.out.println("Image Deleted !!!"); 
+		 		}catch(Exception e)
+		        {
+		            System.out.println("Failed to Delete image !!");            
+		        }
+				 studentPhotoRepository.delete(studentPhoto.getId()); 
+				 try {
+				 studentRepository.delete(id);
+					} catch (Exception e) {
+						model.addAttribute("stsession", stsessionRepository.findAll());
+						model.addAttribute("errormessage", "Can't delete this data.");
+						model.addAttribute("error", e.getMessage());
+						model.addAttribute("student", studentService.getStudentByClass(schclass));
+						return "dashboards/students/student";
+					}						
+			}			
+		} 
+		
 		else { 
-		try {
-			studentRepository.delete(id);
+			if(studentdetails!= null)
+			{		
+			  studentDetailsRepository.delete(studentdetails.getId()); 
+				 try {
+						studentRepository.delete(id);
 
-		} catch (Exception e) {
-			model.addAttribute("stsession", stsessionRepository.findAll());
-			model.addAttribute("errormessage", "Can't delete this data.");
-			model.addAttribute("error", e.getMessage());
-			model.addAttribute("student", studentService.getStudentByClass(schclass));
-			return "dashboards/students/student";
-		}
+					} catch (Exception e) {
+						model.addAttribute("stsession", stsessionRepository.findAll());
+						model.addAttribute("errormessage", "Can't delete this data.");
+						model.addAttribute("error", e.getMessage());
+						model.addAttribute("student", studentService.getStudentByClass(schclass));
+						return "dashboards/students/student";
+					}
+				
+			}
+			else {
+				 
+				 try {
+				  studentRepository.delete(id);
+
+					} catch (Exception e) {
+						model.addAttribute("stsession", stsessionRepository.findAll());
+						model.addAttribute("errormessage", "Can't delete this data.");
+						model.addAttribute("error", e.getMessage());
+						model.addAttribute("student", studentService.getStudentByClass(schclass));
+						return "dashboards/students/student";
+					}						
+			}	
 		}
 		redirectAttributes.addAttribute("schclass", student.getSchclass());
 		return "redirect:/dashboards/students/{schclass}";
 	}
-
+	
+	
+	
 	
 	
 	// Edit a single Student from the list
@@ -263,7 +307,7 @@ public class AdminStudentController {
  		       
  		        model.addAttribute("errormessage", "Something wrong...");
  		        model.addAttribute("studentPhoto",studentPhoto); 
- 		       model.addAttribute("student", student);
+ 		        model.addAttribute("student", student);
  		        return "dashboards/students/insertPhoto";
        }	 
        
@@ -280,7 +324,7 @@ public class AdminStudentController {
  		}
  				    	
  		        studentPhotoRepository.save(studentPhoto);
- 		       redirectAttributes.addAttribute("stid", student.getId());
+ 		        redirectAttributes.addAttribute("stid", student.getId());
                 return "redirect:/dashboards/students/view-student/{stid}";
     }
     
@@ -379,5 +423,85 @@ public class AdminStudentController {
      //////STUDENT DETAILS PART//////
 	//Insert Student Details page
  	
+    @RequestMapping("/insertdetails/{stid}")
+    public String studentdetailinsert(Model model, @PathVariable("stid") Long stid) {
+    	
+    	model.addAttribute("student", studentRepository.findById(stid));
+    	model.addAttribute("studentdetail", new StudentDetails());
+        return "dashboards/students/insertdetail";
+    }
+    
+    
+	// Save Student Details 
+	@PostMapping("/save-studentdetail")
+	public String savedetails(Model model, @Valid @ModelAttribute("studentDetails") StudentDetails studentDetails, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+		
+ 		Long stid=studentDetails.getStudent().getId();
+ 		Student student= studentRepository.findById(stid);
+		// If there are some error...
+		if (bindingResult.hasErrors()) {
+
+			model.addAttribute("errorstudent", "Something wrong...");
+			model.addAttribute("StudentDetails", studentDetails);
+			return "dashboards/students/insert";
+		}
+
+		studentDetailsRepository.save(studentDetails);
+		redirectAttributes.addAttribute("stid", student.getId());
+        return "redirect:/dashboards/students/view-student/{stid}";
+	}
+
+    // Delete Student Photo by id 
+ 	@RequestMapping("/delete-studentdetails") 
+    public String studentdetailsdelete(Model model
+    		,@RequestParam Long id, RedirectAttributes redirectAttributes) {
+ 		
+ 		StudentDetails studentDetails=studentDetailsRepository.findById(id); 
+ 		Long stid=studentDetails.getStudent().getId();
+ 		Student student= studentRepository.findById(stid);
+ 		redirectAttributes.addAttribute("stid", student.getId());
+ 		
+ 		try {
+ 			studentDetailsRepository.delete(id); 
+
+		} catch (Exception e) {
+			model.addAttribute("errormessage", "Can't delete this data.");
+			model.addAttribute("error", e.getMessage());
+			return "redirect:/dashboards/students/view-student/{stid}";
+		}    		    
+ 		    return "redirect:/dashboards/students/view-student/{stid}";
+    }
+	
+	
+    // Open edit Student Details page
+ 	@RequestMapping("/edit-studentdetails/{stid}") 
+ 	public String editsdetails(Model model, @PathVariable("stid") Long stid) {        
+ 		model.addAttribute("studentdetail", studentDetailsRepository.findById(stid));       
+        return "dashboards/students/editdetail";
+ 	}
+ 	
+ 	
+    // Update Student new Details 
+  	@PostMapping("/update-studentdetails") 
+     public String studentDetailsUpdate(Model model,@ModelAttribute StudentDetails studentDetails
+     		, BindingResult bindingResult, RedirectAttributes redirectAttributes
+     		) {	
+ 
+  		Long stid=studentDetails.getStudent().getId();
+     	Student student= studentRepository.findById(stid);
+     	
+     	if (bindingResult.hasErrors()) {
+     		model.addAttribute("errormessage", "Something wrong...");		 
+		        model.addAttribute("studentDetails",studentDetails);  
+		        return "dashboards/students/editdetail";
+     		
+		}
+     		
+     	           studentDetailsRepository.save(studentDetails);
+                   redirectAttributes.addAttribute("stid", student.getId());
+                   return "redirect:/dashboards/students/view-student/{stid}";
+     }
+
  	
 }

@@ -100,49 +100,79 @@
                        
                        <div class="col-sm-12">
                     <div th:if="!${#lists.isEmpty(studentDetails)}">
-                     <table class="table table-hover" th:object="${student}">                    		
-        		     <tr>
-        		        <td>ID</td>
-        		        <td th:text="${student.id}"></td>
+                    
+                   <h2> Details </h2>  
+                     <table class="table table-hover" th:object="${studentDetails}">                    		
+        		          <tr> 
+        				<td>Date of Birth</td> 
+        				<td th:text="${#dates.format(studentDetails.birthdate, 'dd-MMM-yyyy')}"></td>       				
+                      </tr>
+                      <tr> 
+        				<td>Date of Admission</td> 
+        				<td th:text="${#dates.format(studentDetails.admissiondate, 'dd-MMM-yyyy')}"></td>       				
+                      </tr>
+        		        
+        		        <tr>     		     
+        		        <td>Address</td>
+        		        <td th:text="${studentDetails.address}"></td>
         		        </tr>
         		        <tr>
-        		        <td>Name</td>
-        		        <td th:text="${student.name}"></td>
+        		        <td>Father Name</td>
+        		        <td th:text="${studentDetails.fathername}"></td>
         		        </tr>
         		        <tr>
-        				<td>Registration Number</td>
-        				<td th:text="${student.registration}"></td>
+        				<td>Father Occupation</td>
+        				<td th:text="${studentDetails.fatheroccupation}"></td>
         			    </tr> 
         				<tr>
-        				<td>Roll Number</td>
-        		        <td th:text="${student.rollno}"></td>
+        				<td>Father Contact No</td>
+        		        <td th:text="${studentDetails.fathercontactno}"></td>
         		        </tr> 
         				 
         			    <tr>
-        				<td>Class</td>
-        				<td th:text="${student.schclass}"></td>
-        				</tr> 
+        				<td>Father NID</td>
+        				<td th:text="${studentDetails.fathernid}"></td>
+        				</tr>
+        				<tr>
+        		        <td>mother Name</td>
+        		        <td th:text="${studentDetails.mothername}"></td>
+        		        </tr>
+        		        <tr>
+        				<td>Mother Occupation</td>
+        				<td th:text="${studentDetails.motheroccupation}"></td>
+        			    </tr> 
+        				<tr>
+        				<td>Mother Contact No</td>
+        		        <td th:text="${studentDetails.mothercontactno}"></td>
+        		        </tr> 
+        				 
+        			    <tr>
+        				<td>Mother NID</td>
+        				<td th:text="${studentDetails.mothernid}"></td>
+        				</tr>
+        				
+        				 
         				<tr>  
-        				<td>Version</td>
-        				<td th:text="${student.version}"></td> 
+        				<td>Guardian Name</td>
+        				<td th:text="${studentDetails.guardianname}"></td> 
         				</tr>
         				
         				 <tr> 
-        				<td>Gender</td> 
-        				<td th:text="${student.gender}"></td>        				
+        				<td>Guardian Contact No</td> 
+        				<td th:text="${studentDetails.guardiancontactno}"></td>        				
                       </tr>
                      
                       <tr> 
         				<td>Data Uploaded</td> 
-        				<td th:text="${#dates.format(student.createDate, 'dd-MMM-yyyy HH:mm')}"></td>       				
+        				<td th:text="${#dates.format(studentDetails.createDate, 'dd-MMM-yyyy HH:mm')}"></td>       				
                       </tr>
                       <tr> 
         				<td>Last Modified</td> 
-        				<td th:text="${#dates.format(student.modifyDate, 'dd-MMM-yyyy HH:mm')}"></td>       				
+        				<td th:text="${#dates.format(studentDetails.modifyDate, 'dd-MMM-yyyy HH:mm')}"></td>       				
                       </tr>
                       <tr> 
         				<td>Edit</td> 
-        				<td><a th:href="@{'/dashboards/students/edit-studentdetails/' +${studentPhoto.id}}"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>        				
+        				<td><a th:href="@{'/dashboards/students/edit-studentdetails/' +${studentDetails.id}}"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>        				
                       </tr>  
                       
                       <tr> 
@@ -151,15 +181,11 @@
                       </tr>        				
                   </table>
                     
-                     
-                     <a th:href="@{'/dashboards/students/edit-studentdetails/' +${studentPhoto.id}}" class="btn btn-success" style="margin-left:25%;">Edit </a>
-                     <a th:href="@{'/dashboards/students/delete-studentdetails?id=' +${studentPhoto.id}}" class="btn btn-success" style="margin-left:25%;">Delete </a>
-                    
                     </div> 
                     
                     <div th:if="${#lists.isEmpty(studentDetails)}"> 
                    <h2>Insert Student Details</h2>
-                    <a th:href="@{'/dashboards/students/insertdetails/' +${student.id}}" class="btn btn-success" style="margin-left:25%;">Insert Image</a>
+                    <a th:href="@{'/dashboards/students/insertdetails/' +${student.id}}" class="btn btn-success" style="margin-left:25%;">Insert Details</a>
                     </div>
                      </div>
                                     

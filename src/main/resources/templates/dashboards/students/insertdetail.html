@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin-layout">
+	<div layout:fragment="main_content">
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Student:<span th:text="${student.name}"></span>
+				</h1>
+			</section>
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-2"></div>
+					<div class="col-md-8 col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									Insert Photo of <span th:text="${student.name}"></span>
+								</h3>
+								<p class="text-red" th:text="${errormessage}"></p>
+							</div>
+							<div class="box-body table-responsive no-padding">
+								<div class="col-md-12">
+									<form role="form" method="POST" th:object="${studentdetail}"
+										th:action="@{/dashboards/students/save-studentdetail}"
+										enctype="multipart/form-data">
+										<input type="hidden" id="student" name="student"
+											th:value="${student.id}" /> 
+										
+									<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group">
+                                      <label>Date of Birth</label>
+                                     <input type="date" pattern="yyyy-MM-dd" class="form-control" name="birthdate" id="birthdate" th:value="${birthdate}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}">Birth Date Error</span>
+                                      </div>
+                                      </div>
+                                      
+                                      <div class="col-xs-6">
+                                      <div class="form-group">
+                                      <label>Admission Date</label>
+                                     <input type="date" pattern="yyyy-MM-dd" class="form-control" name="admissiondate" id="admissiondate" th:value="${admissiondate}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('admissiondate')}" th:errors="*{admissiondate}">Admission Date Error</span>
+                                      </div>
+                                      </div>
+											</div>
+                                      <div class="form-group">
+											<label> Student Address</label> <input type="text"
+												th:required="required" maxlength="250" name="address" id="address"
+												class="form-control" placeholder="Enter student address"
+												th:value="${address}" /> <span class="help-block text-danger"
+												th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+										</div>
+                                      
+										<div class="form-group">
+											<label> Father Name</label> <input type="text"
+												th:required="required" maxlength="250" name="fathername" id="fathername"
+												class="form-control" placeholder="Enter father name"
+												th:value="${fathername}" /> <span class="help-block text-danger"
+												th:if="${#fields.hasErrors('fathername')}" th:errors="*{fathername}"></span>
+										</div>
+
+										<div class="row">
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Father Occupation</label> <input type="text"
+														th:required="required" maxlength="150" name="fatheroccupation"
+														id="fatheroccupation" class="form-control"
+														placeholder="Enter father occupation"
+														th:value="${fatheroccupation}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('fatheroccupation')}"
+														th:errors="*{fatheroccupation}"></span>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Father Contact No</label> <input type="text"
+														maxlength="50" name="fathercontactno" id="fathercontactno"
+														class="form-control"
+														placeholder="Enter father contact"
+														th:value="${fathercontactno}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('fathercontactno')}"
+														th:errors="*{fathercontactno}"></span>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Father NID</label> <input type="number"
+														maxlength="50" name="fathernid" id="fathernid"
+														class="form-control"
+														placeholder="Enter father NID"
+														th:value="${fathernid}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('fathernid')}"
+														th:errors="*{fathernid}"></span>
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label> Mother Name</label> <input type="text"
+												th:required="required" maxlength="250" name="mothername" id="mothername"
+												class="form-control" placeholder="Enter mother name"
+												th:value="${mothername}" /> <span class="help-block text-danger"
+												th:if="${#fields.hasErrors('mothername')}" th:errors="*{mothername}"></span>
+										</div>
+
+										<div class="row">
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Mother Occupation</label> <input type="text"
+													    maxlength="150" name="motheroccupation"
+														id="motheroccupation" class="form-control"
+														placeholder="Enter mother occupation"
+														th:value="${motheroccupation}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('motheroccupation')}"
+														th:errors="*{motheroccupation}"></span>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Mother Contact No</label> <input type="text"
+														maxlength="50" name="mothercontactno" id="mothercontactno"
+														class="form-control"
+														placeholder="Enter mother contact"
+														th:value="${mothercontactno}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('mothercontactno')}"
+														th:errors="*{mothercontactno}"></span>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label>Mother NID</label> <input type="number"
+														maxlength="50" name="mothernid" id="mothernid"
+														class="form-control"
+														placeholder="Enter mother NID"
+														th:value="${mothernid}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('mothernid')}"
+														th:errors="*{mothernid}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12 col-md-6">
+												<div class="form-group">
+													<label>Guardian Name</label> <input type="text"
+														maxlength="50" name="guardianname" id="guardianname"
+														class="form-control"
+														placeholder="Enter guardian name"
+														th:value="${guardianname}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('guardianname')}"
+														th:errors="*{guardianname}"></span>
+												</div>
+											</div>
+											<div class="col-xs-12 col-md-6">
+												<div class="form-group">
+													<label>Guardian Contact No</label> <input type="text"
+														maxlength="50" name="guardiancontactno" id="guardiancontactno"
+														class="form-control"
+														placeholder="Enter guardian contact"
+														th:value="${guardiancontactno}" /> <span
+														class="help-block text-danger"
+														th:if="${#fields.hasErrors('guardiancontactno')}"
+														th:errors="*{guardiancontactno}"></span>
+												</div>
+											</div>
+										</div>
+
+
+										<div class="row">
+											<div class="col-xs-12 col-md-6 text-center">
+												<input type="submit" value="Submit" class="btn btn-primary"
+													tabindex="7" />
+											</div>
+											<div class="col-xs-12 col-md-6 text-center">
+												<input type="Reset" onclick="window.history.go(-1);"
+													value="Cancel" class="btn btn-danger" tabindex="7" />
+											</div>
+										</div>
+										<hr class="colorgraph" />
+									</form>
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<div class="col-xs-2"></div>
+				</div>
+
+			</section>
+			<!-- /.content -->
+		</div>
+	</div>
+</div>

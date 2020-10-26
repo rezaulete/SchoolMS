@@ -29,7 +29,7 @@ import school.model.enumvalue.Version;
  * @author Md Rezaul karim
  */
 @Entity
-@Table(name="StudentDetais")
+@Table(name="StudentDetails")
 public class StudentDetails {
 
     @Id
@@ -79,20 +79,11 @@ public class StudentDetails {
     @Column(name = "guardian_contact")
 	private Long guardiancontactno;
     
-    @Column(name = "stsession")
-    private String stsession;
-    
-    @Column(name = "class")
-    private Schclass grade;
-    
-    @Column(name = "Version")
-    private Version version;
-  
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "admitiongdate")
     @Temporal(TemporalType.DATE)
-	private Date admitiondate;
+	private Date admissiondate;
 	
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -251,43 +242,13 @@ public class StudentDetails {
 	}
 
 
-	public String getStsession() {
-		return stsession;
+	public Date getAdmissiondate() {
+		return admissiondate;
 	}
 
 
-	public void setStsession(String stsession) {
-		this.stsession = stsession;
-	}
-
-
-	public Schclass getGrade() {
-		return grade;
-	}
-
-
-	public void setGrade(Schclass grade) {
-		this.grade = grade;
-	}
-
-
-	public Version getVersion() {
-		return version;
-	}
-
-
-	public void setVersion(Version version) {
-		this.version = version;
-	}
-
-
-	public Date getAdmitiondate() {
-		return admitiondate;
-	}
-
-
-	public void setAdmitiondate(Date admitiondate) {
-		this.admitiondate = admitiondate;
+	public void setAdmissiondate(Date admissiondate) {
+		this.admissiondate = admissiondate;
 	}
 
 
@@ -309,5 +270,7 @@ public class StudentDetails {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-	
+
+
+
 }
