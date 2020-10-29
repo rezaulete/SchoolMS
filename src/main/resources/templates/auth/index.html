@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="admin-layout">
 
     <div layout:fragment = "main_content">
         <!-- Content Wrapper. Contains page content -->
@@ -27,7 +29,7 @@
 
                         <div class="box-tools pull-right">
                             <div class="btn-group">
-                                <a  th:href="@{/user/create}" type="button" class="btn  btn-warning btn-xs">New User Create</a>
+                                <a  th:href="@{/users/registration}" type="button" class="btn  btn-warning btn-xs">New User Create</a>
                              </div>
                         </div>
                     </div>
@@ -41,14 +43,14 @@
                                           <th>Email</th>
                                         <th>action </th>
                                     </tr>
-                                    <tr th:each=" bookList, status : ${bookList}">
-                                    <td th:text="${status.count}"></td>
-                                    <td th:text="${bookList.writerName.name}"></td>
-                                        <td th:text="${bookList.name}"></td>
+                                    <tr th:each="users : ${users}">
+                                    <td th:text="${users.id}"></td>
+                                    <td th:text="${users.name}"></td>
+                                        <td th:text="${users.email}"></td>
                                         <td><a  th:href="@{/chapter/index/}" type="button" class="btn  btn-success btn-xs">Add Chapter</a></td>
                                         <td>                                    
-                                            <a  th:href="@{/book/edit/{id} (id=${bookList.id})}" type="button" class="btn  btn-success btn-xs">Edit/Save</a>
-                                            <a  th:href="@{/book/delete/{id} (id=${bookList.id})}" type="button" class="btn  btn-danger btn-xs">delete</a> </td>                          
+                                            <a  th:href="@{/book/edit/{id} (id=${users.id})}" type="button" class="btn  btn-success btn-xs">Edit/Save</a>
+                                            <a  th:href="@{/book/delete/{id} (id=${users.id})}" type="button" class="btn  btn-danger btn-xs">delete</a> </td>                          
                                     </tr>                                  
                                 </table>
                     </div>

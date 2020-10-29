@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="admin-layout">
 
     <div layout:fragment = "main_content">
 
@@ -34,9 +36,9 @@
                                 <div class="box-header with-border">
                                     <h3 class="box-title"> Add/ Edit Disciplinary Action</h3>
                                     <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        
                                     </div>
                                 </div>
 
@@ -60,7 +62,7 @@
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-4 control-label"> Name  :<span class="text-red"> * </span></label>
                                                 <div class="col-sm-7">                    
-                                                    <input type="text"  class="form-control  "    th:field="*{name}"  required="require" />        
+                                                    <input type="text"  class="form-control" th:field="*{name}" required="required"/>        
                                                     <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">First Name Error</span>
                                                 </div>                            
                                             </div>

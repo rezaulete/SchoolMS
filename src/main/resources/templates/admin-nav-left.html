@@ -41,9 +41,12 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a th:href="@{/dashboards/index}"><i
-									class="fa fa-circle-o"></i> USER</a></li>
-						</ul></li>
+							<li><a th:href="@{/users/index}"><i
+									class="fa fa-circle-o"></i> Users</a></li>			
+							<li><a th:href="@{/role/index}"><i
+									class="fa fa-circle-o"></i> Roles</a></li>
+						</ul>
+						</li>
 
 
 					<li class="treeview"><a href="#"> <i
@@ -144,7 +147,7 @@
 						<ul class="treeview-menu">
 							<li><a th:href="@{/dashboards/students/index}"><i
 									class="fa fa-circle-o"></i>Student Info</a></li>
-							<li><a th:href="@{/dashboards/students/insert}"><i
+							<li><a th:href="@{/dashboards/students/insertclass}"><i
 									class="fa fa-circle-o"></i> Insert Student</a></li>							
 							<li><a th:href="@{/adminsection/index}"><i
 									class="fa fa-circle-o"></i> Section</a></li>

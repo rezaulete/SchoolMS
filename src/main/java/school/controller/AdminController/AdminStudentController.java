@@ -35,6 +35,12 @@ import school.repository.StudentPhotoRepository;
 import school.repository.StudentRepository;
 import school.services.StudentService;
 
+
+/**
+*
+* @author Md Rezaul karim
+*/
+
 @Controller
 @RequestMapping("/dashboards/students")
 public class AdminStudentController {
@@ -63,7 +69,12 @@ public class AdminStudentController {
 		return "dashboards/students/index";
 	}
 
-	
+	@RequestMapping(value = { "/insertclass"})
+	public String insertClass(Model model) {
+		model.addAttribute("student", studentRepository.findAll());
+		return "dashboards/students/insertclass";
+	}
+
 	
 	// Open Student list table of a single class	
 	@RequestMapping(value = "/{schclass}")

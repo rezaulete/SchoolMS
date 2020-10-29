@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="admin-layout">
 
     <div layout:fragment = "main_content">
         <!-- Content Wrapper. Contains page content -->
@@ -47,7 +49,7 @@
                                         <label for="name" class="col-sm-3 control-label"> Name<span class="text-red"> * </span> </label>
                                         <div class="col-sm-8">    
                                             <div class="input-group " >
-                                                <input type="text"    class="form-control   " th:field="*{name}"  />                
+                                                <input type="text" class="form-control" th:field="*{name}"/>                
                                             </div>  
                                             <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">First Name Error</span>
                                         </div>
@@ -59,8 +61,8 @@
                                             <div class="input-group " >
                                                 <input type="text"    class="form-control "  th:field="*{email}"  />                
                                             </div>  
-                                            <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">First Name Error</span>
-                                            <span  class="help-block has-error text-red" th:if="${email_exist}" th:text="${email_exist}">First Name Error</span>
+                                            <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</span>
+                                            <span  class="help-block has-error text-red" th:if="${email_exist}" th:text="${email_exist}"> Error</span>
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-12">
@@ -69,14 +71,14 @@
                                             <div class="input-group " >
                                                 <input type="text"    class="form-control   " th:field="*{password}"  />                
                                             </div>  
-                                            <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">First Name Error</span>
+                                            <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</span>
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-12">
                                         <label for="role" class="col-sm-3 control-label"> Role/ Permission<span class="text-red"> * </span> </label>
 
                                         <div class="col-sm-8">
-                                            <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">First Name Error</span>
+                                            <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Error</span>
                                             <ul class="list-inline">
                                                 <li th:each="feat : ${roles}" >
                                                     <input type="checkbox" th:field="*{role}"  th:value="${feat.id}" />
@@ -89,12 +91,7 @@
                                     <div class="form-group col-sm-12">
                                         <label for="name" class="col-sm-3 control-label">Active <span class="text-red"> * </span> </label>
                                         <div class="col-sm-2">    
-                                            <select class="form-control  "  id="role"  th:field="*{active}" >
-                                                <option value=" "> Select one</option>
-                                                <option th:each =" status :${status}"
-                                                        th:value=" ${status}" 
-                                                        th:text="${status}"> Select one</option>
-                                            </select> 
+                                            <input type="checkbox" name="active" th:checked="${active}" />
                                             <span  class="help-block has-error text-red" th:if="${#fields.hasErrors('active')}" th:errors="*{active}">First Name Error</span>
                                         </div>
                                     </div>

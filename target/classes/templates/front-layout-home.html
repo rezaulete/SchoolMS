@@ -5,7 +5,7 @@ xmlns:th="http://www.thymeleaf.org"
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>Welcome To Result Management System</title>
+        <title>School Management System</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
         <!-- Bootstrap 3.3.6 -->
@@ -28,30 +28,23 @@ xmlns:th="http://www.thymeleaf.org"
         <div class="wrapper">
             <header class="main-header">
                 <div th:replace="front-header">
-
-                    <!-- Header  -->
-
                 </div>
+                
             </header>
             <!-- =============================================== -->
             <div class="content-wrapper box-top">
                 <section class="row">
-
-                    <!-- News Box -->
-         
-                    
                 </section>
                 <section class="row">  
                     <div class="content">
                         <div class="col-sm-9" >
-                            <div   layout:fragment="main_content">
+                            <div layout:fragment="main_content">
                                 main Content
                             </div>
                         </div>
                         <div class="col-sm-3 ">
-                            <div  th:replace="front-left">
+                            <div th:replace="front-left">
                                 Left Side 
-                                =============================================== 
                             </div>
                         </div>
                     </div>
@@ -62,8 +55,6 @@ xmlns:th="http://www.thymeleaf.org"
                 </div>
 
             <!-- /.control-sidebar -->
-            <!-- Add the sidebar's background. This div must be placed
-                 immediately after the control sidebar -->
             <div class="control-sidebar-bg"></div>
         </div>
         <!-- ./wrapper -->
@@ -73,14 +64,14 @@ xmlns:th="http://www.thymeleaf.org"
         <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
         <!-- Bootstrap 3.3.6 -->
         <!-- SlimScroll -->
-        <script type="text/javascript"  th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}">...</script>
+        <script type="text/javascript" th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
         <!-- FastCtlick -->
-        <script type="text/javascript"  th:src="@{/plugins/fastclick/fastclick.js}">...</script>
+        <script type="text/javascript" th:src="@{/plugins/fastclick/fastclick.js}"></script>
         <!-- AdminLTE App -->
-        <script th:src="@{/webjars/adminlte/2.3.11/dist/js/app.min.js}">...</script>
+        <script th:src="@{/webjars/adminlte/2.3.11/dist/js/app.min.js}"></script>
         <!-- AdminLTE for demo purposes -->
-        <script type="text/javascript"  th:src="@{/plugins/admin-lte/dist/js/demo.js}">...</script>
-        <!--<script th:src="@{/webjars/datatables/1.10.6/js/jquery.dataTables.js}">...</script>-->
-        <script type="text/javascript " th:src="@{/js/apps.js}">...</script>
+        <script type="text/javascript" th:src="@{/plugins/admin-lte/dist/js/demo.js}"></script>
+        <!--<script th:src="@{/webjars/datatables/1.10.6/js/jquery.dataTables.js}"></script>-->
+        <script type="text/javascript" th:src="@{/js/apps.js}"></script>
     </body>
 </html>

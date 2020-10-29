@@ -195,9 +195,9 @@ section .section-title {
 
 #footer ul.quick-links li {
 	padding: 3px 0;
-	-webkit-transition: .5s all ease;
-	-moz-transition: .5s all ease;
-	transition: .5s all ease;
+	-webkit-transition: .2s all ease;
+	-moz-transition: .2s all ease;
+	transition: .2s all ease;
 }
 
 #footer ul.quick-links li:hover {
@@ -222,6 +222,8 @@ section .section-title {
 		margin-bottom: 10px;
 	}
 }
+
+
 /*..... Footer End..... */
 /* footer social icons */
 .social:hover {
@@ -431,7 +433,6 @@ section .section-title {
 	display: inline-flex !important;
 }
 
-}
 .TextLine1 {
 	width: 100%;
 	min-height: 20px;
@@ -496,68 +497,3 @@ section .section-title {
 	animation: Gradient 15s ease infinite;
 }
 
-@
--webkit-keyframes Gradient { 0% {
-	background-position: 0% 50%
-}
-
-50%
-{
-background-position
-:
- 
-100%
-50%
-}
-100%
-{
-background-position
-:
- 
-0%
-50%
-}
-}
-@
--moz-keyframes Gradient { 0% {
-	background-position: 0% 50%
-}
-
-50%
-{
-background-position
-:
- 
-100%
-50%
-}
-100%
-{
-background-position
-:
- 
-0%
-50%
-}
-}
-@
-keyframes Gradient { 0% {
-	background-position: 0% 50%
-}
-50%
-{
-background-position
-:
- 
-100%
-50%
-}
-100%
-{
-background-position
-:
- 
-0%
-50%
-}
-}

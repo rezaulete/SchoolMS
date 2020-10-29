@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="admin-layout">
 
     <div layout:fragment = "main_content">
         <!-- Content Wrapper. Contains page content -->
@@ -48,9 +50,9 @@
                                     </tr>
                                     <tr th:each="list,status:${users}">
                                         <td th:text="${status.count}">2.</td>
-                                        <td th:text="${list.name}">Chakma</td>
-                                        <td th:text="${list.email}">Email</td>
-                                        <td th:text="${list.password}">Email</td>
+                                        <td th:text="${list.name}"></td>
+                                        <td th:text="${list.email}"></td>
+                                        <td th:text="${list.password}"></td>
                                         <td>
                                             <span th:each="roles,status:${list.role}">    
                                            <span th:text="${roles.name}"> </span>
