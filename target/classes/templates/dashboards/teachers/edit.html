@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="admin-layout">
+    <div layout:fragment = "main_content">
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>Teacher
+                    <small>Organization Teacher  details</small>
+                </h1>
+            </section>   
+            <!-- Main content -->
+            <section class="content">
+                 <div class="row">
+                        <div class="col-xs-12">
+                  <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                           <div class="col-md-12">                            
+                                 <form role="form" method="POST" th:object="${teacher}" th:action="@{/adminteachers/update-teacher}" enctype="multipart/form-data">
+                                   <input type="hidden" id="id" name="id" th:value="${teacher.id}"/>
+                                   <div class="form-group">
+                                    <label>Serial No</label>
+                                    <input th:required="required" type="text" name="serialno" id="serialno" class="form-control" placeholder="Enter Serial Number(According to position)" th:value="${teacher.serialno}"/>
+                                   <span class="help-block text-danger" th:if="${#fields.hasErrors('serialno')}" th:errors="*{serialno}"></span>
+                                    </div>
+                                   <div class="form-group">
+                                    <label>Name</label>
+                                    <input th:required="required" type="text" name="teachername" id="teachername" class="form-control" placeholder="Enter teacher Name" th:value="${teacher.teachername}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('teachername')}" th:errors="*{teachername}"></span>
+                                    </div>
+                                   <div class="form-group">
+                                    <label>Designation</label>
+                                    <input type="text" name="designation" id="designation" class="form-control" placeholder="Enter Designation(Senior teacher, Lecturer)" th:value="${teacher.designation}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></span>
+                                    </div>
+                                    <div class="form-group">
+                                    <label>Short Profile</label>
+                                    <textarea th:required="required" name="shortprofile" id="shortprofile" class="form-control" placeholder="Short Profile"  th:value="${teacher.shortprofile}" th:text="${teacher.shortprofile}"></textarea>                                 
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('shortprofile')}" th:errors="*{shortprofile}"></span>
+                                    </div> 
+                                    
+                                   <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input th:required="required" type="number" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="Enter Phone Number" th:value="${teacher.phoneNumber}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+                                    </div>
+                                   <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" id="email" class="form-control" placeholder="Enter Your Email"  th:value="${teacher.email}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                                    </div>
+                                    <div class="form-group">
+                                      <label>Joining date</label>
+                                     <input type="date" pattern="yyyy-MM-dd" class="form-control" name="joiningdate" id="joiningdate" th:value="${teacher.joiningdate}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('joiningdate')}" th:errors="*{joiningdate}"></span>
+                                      </div>
+                                    <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea name="address" id="address" class="form-control" placeholder="address"  th:value="${teacher.address}" th:text="${teacher.address}"></textarea>                                 
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+                                    </div>
+                                    
+                                   <div class="form-group">
+                                         <label>Gender</label>
+                                      <select class="form-control" id="gender" name="gender" th:value="${gender}">
+                                      <option th:text="${teacher.gender}"></option>
+			                               <option th:each="gender : ${T(itgarden.model.school.enumvalue.Gender).values()}"
+                                              th:value="${{gender}}"
+                                              th:selected="${gender == T(itgarden.model.school.enumvalue.Gender)}"
+                                              th:text="${gender.name()}">
+                                          </option>
+                                       </select>                         
+                                    </div> 
+                                    
+                                   <div class="form-group">
+                                    <label>Facebook</label>
+                                    <input type="url"  pattern="https?://.+" name="facebook" id="facebook" class="form-control" placeholder="Enter facebook Url(https://www.facebook.com/abc)" th:value="${facebook}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('facebook')}" th:errors="*{facebook}"></span>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                    <label>Twitter</label>
+                                    <input type="url"  pattern="https?://.+"  name="twitter" id="twitter" class="form-control" placeholder="Enter twitter Url(https://www.twitter.com/abc)" th:value="${twitter}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('twitter')}" th:errors="*{twitter}"></span>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                    <label>Linkedin</label>
+                                    <input type="url"  pattern="https?://.+"  name="linkedin" id="linkedin" class="form-control" placeholder="Enter linkedin Url(https://www.linkedin.com/abc)" th:value="${linkedin}"/>
+                                    <span class="help-block text-danger" th:if="${#fields.hasErrors('linkedin')}" th:errors="*{linkedin}"></span>
+                                    </div>
+                          
+                             <div class="form-group">
+                              <label>Upload image</label>
+                             <input type="file" name="file" accept="image/*"/><br/>
+                             <input type="hidden" id="picFile" name="picFile" th:value="${teacher.picFile}"/>
+		                       <p th:text="${message}" class="text-danger"></p>
+		                       <p th:text="'image name:'+${teacher.picFile}" class="text-danger"></p>                
+                             </div>
+                             
+                                  
+		                     	<div class="row">
+			                       	<div class="col-xs-12 col-md-6 text-center"><input type="submit" value="Submit" class="btn btn-primary" tabindex="7"/></div>
+			                       	<div class="col-xs-12 col-md-6 text-center"><input type="Reset" onclick="window.history.go(-1);" value="Cancel" class="btn btn-danger" tabindex="7"/></div>
+		                      	</div>
+		                      	<hr class="colorgraph"/>                
+                          </form>
+                          </div>                
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+       
+                    <!-- /.col -->
+                </div>
+
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+</div>
